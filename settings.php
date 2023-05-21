@@ -58,6 +58,11 @@ if ($ADMIN->fulltree) {
     $PAGE->requires->js('/mod/hvp/library/js/jquery.js', true);
     $PAGE->requires->js('/mod/hvp/library/js/h5p-display-options.js', true);
 
+    // Should we save and grade each interaction inside an Interactive Video or a Presentation?
+    // when xAPI verb = answered
+    $settings->add(new admin_setting_configcheckbox('mod_hvp/saveeachinteraction',
+        get_string('saveeachinteraction', 'hvp'), get_string('saveeachinteraction_help', 'hvp'), 1));
+
     // Send usage statistics.
     $settings->add(
         new admin_setting_configcheckbox('mod_hvp/send_usage_statistics',
@@ -92,6 +97,15 @@ if ($ADMIN->fulltree) {
                                                   H5PDisplayOptionBehaviour::ALWAYS_SHOW, $embedchoices));
     $settings->add(new admin_setting_configcheckbox('mod_hvp/copyright', get_string('enablecopyright', 'hvp'), '', 1));
     $settings->add(new admin_setting_configcheckbox('mod_hvp/icon', get_string('enableabout', 'hvp'), '', 1));
+
+    // CKEditor BIDI support
+    $settings->add(new admin_setting_heading('mod_hvp/ckeditor_buttons', get_string('ckeditorbuttons', 'hvp'), ''));
+    $settings->add(new admin_setting_configcheckbox('mod_hvp/bidi',
+        get_string('ckeditorbutton_bidi', 'hvp'), get_string('ckeditorbutton_bidi_help', 'hvp'), 1));
+    $settings->add(new admin_setting_configcheckbox('mod_hvp/editordirsupport',
+        get_string('editordirsupport', 'hvp'), get_string('editordirsupport_help', 'hvp'), 1));
+    $settings->add(new admin_setting_configcheckbox('mod_hvp/contentlang',
+        get_string('contentlang', 'hvp'), get_string('contentlang_help', 'hvp'), 1));
 
     // Content Types header.
     $settings->add(new admin_setting_heading('mod_hvp/hub_settings', get_string('hubsettingsheader', 'hvp'), ''));
