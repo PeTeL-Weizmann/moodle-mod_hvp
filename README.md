@@ -9,8 +9,8 @@ https://github.com/PeTeL-Weizmann/moodle-qtype_hvp
 
 ## Versions
 
-H5P v1.26.1 for Moodle 4.1+ version is available in branch: v1261_rtl_support
-H5P v1.27.2 for Moodle 4.5+ version is available in branch: m45_hvp_1272_rtl_support
+* H5P v1.26.1 for Moodle 4.1+ version is available in branch: v1261_rtl_support
+* H5P v1.27.2 for Moodle 4.5+ version is available in branch: m45_hvp_1272_rtl_support
 
 ## Usage
 
@@ -80,5 +80,6 @@ RTL support added and funded by the [Department of science teaching](https://www
 for the [PeTeL](https://stwww1.weizmann.ac.il/petel/) - personalized teaching and learning envirunment project.
 
 ## Credit
-Moodle 4.1 H5P version with RTL support by Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
-Moodle 4.5 H5P version with RTL support by Oshrat Lusky <oshrat.luski@weizmann.ac.il>
+
+* Moodle 4.1 H5P version with RTL support by Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
+* Moodle 4.5 H5P version with RTL support by Oshrat Lusky <oshrat.luski@weizmann.ac.il>
