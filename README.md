@@ -82,4 +82,4 @@ for the [PeTeL](https://stwww1.weizmann.ac.il/petel/) - personalized teaching an
 ## Credit
 
 * Moodle 4.1 H5P version with RTL support by Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
-* Moodle 4.5 H5P version with RTL support by Oshrat Lusky <oshrat.luski@weizmann.ac.il>
+* Moodle 4.5 H5P version with RTL support by Oshrat Luski <oshrat.luski@weizmann.ac.il>
