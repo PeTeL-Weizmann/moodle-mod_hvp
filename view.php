@@ -30,11 +30,11 @@ $id = required_param('id', PARAM_INT);
 // Verify course context.
 $cm = get_coursemodule_from_id('hvp', $id);
 if (!$cm) {
-    print_error('invalidcoursemodule');
+    throw new \moodle_exception('invalidcoursemodule');
 }
 $course = $DB->get_record('course', array('id' => $cm->course));
 if (!$course) {
-    print_error('coursemisconf');
+    throw new \moodle_exception('coursemisconf');
 }
 require_course_login($course, true, $cm);
 $context = context_module::instance($cm->id);
@@ -61,16 +61,6 @@ echo $OUTPUT->header();
 if ($CFG->branch < 400) {
     echo $OUTPUT->heading(format_string($content['title']));
     echo '<div class="clearer"></div>';
-
-    // Output introduction.
-    if (trim(strip_tags($content['intro'], '<img>'))) {
-        echo $OUTPUT->box_start('mod_introbox', 'hvpintro');
-        echo format_module_intro('hvp', (object) array(
-            'intro'       => $content['intro'],
-            'introformat' => $content['introformat'],
-        ), $cm->id);
-        echo $OUTPUT->box_end();
-    }
 }
 
 $hashub = (has_capability('mod/hvp:share', $context) && !empty(get_config('mod_hvp', 'site_uuid')) && !empty(get_config('mod_hvp', 'hub_secret')));
@@ -98,16 +88,4 @@ if ($hashub) {
 }
 
 $view->outputview();
-
-// HACK: Add customized CSS to each H5P activity (library).
-// Clean CSS (as JS do not like newline and linebreak chars)
-$content['css'] = str_replace(array("\n", "\r"), '', $content['css']);
-$PAGE->requires->js_amd_inline("
-require(['jquery'], function($) {
-    var head = $('.h5p-iframe').contents().find('head');
-    var css = '<style type=\"text/css\">".$content['css']."</style>';
-    $(head).append(css);
-});
-");
-
 echo $OUTPUT->footer();

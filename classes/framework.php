@@ -135,7 +135,8 @@ class framework implements \H5PFrameworkInterface {
         if (empty($map)) {
             // Create mapping for "converting" language codes.
             $map = array(
-                'no' => 'nb'
+                'no' => 'nb',
+                'he-kids' => 'he'
             );
         }
 
@@ -217,8 +218,6 @@ class framework implements \H5PFrameworkInterface {
             // Generate local tmp file path.
             $localfolder = make_temp_directory(uniqid('hvp-'));
             $localpath = $localfolder . '.h5p';
-            //$localfolder = $CFG->tempdir . uniqid('/hvp-');
-            //$stream      = $localfolder . '.h5p';
 
             // Add folder and file paths to H5P Core.
             $interface = self::instance('interface');

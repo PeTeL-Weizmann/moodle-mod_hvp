@@ -234,7 +234,7 @@ ns.LibrarySelector.prototype.loadSemantics = function (library, params, metadata
     this.form.remove();
   }
 
-  // Add h5p-dir-rtl to h5peditor div, based on iframe's parent document directionality.
+   // Add h5p-dir-rtl to h5peditor div, based on iframe's parent document directionality.
   // Infer default directionality from hosing application.
   // TODO: Discuss if we need this behaviour, as hosting envirument directionality
   //       is affecting the editing (and viewing?) of content. not sure if this is desired.
@@ -250,6 +250,7 @@ ns.LibrarySelector.prototype.loadSemantics = function (library, params, metadata
     return;
   }
   this.$parent.attr('class', 'h5peditor ' + library.split(' ')[0].toLowerCase().replace('.', '-') + '-editor ' + directionality);
+
   // Display loading message
   var $loading = ns.$('<div class="h5peditor-loading h5p-throbber">' + ns.t('core', 'loading') + '</div>').appendTo(this.$parent);
 

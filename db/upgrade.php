@@ -612,7 +612,6 @@ function xmldb_hvp_upgrade($oldversion) {
         2020082800,
         2020091500,
         2020112600,
-        2022121201,
     ];
 
     foreach ($upgrades as $version) {

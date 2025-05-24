@@ -111,11 +111,11 @@ H5P.EventDispatcher.prototype.setActivityStarted = function () {
  */
 H5P.xAPICompletedListener = function (event) {
   if ((event.getVerb() === 'completed' || event.getVerb() === 'answered')
-      && !event.getVerifiedStatementValue(['context', 'contextActivities', 'parent'])) {
+    && !event.getVerifiedStatementValue(['context', 'contextActivities', 'parent'])) {
     var score = event.getScore();
     var maxScore = event.getMaxScore();
     var contentId = event.getVerifiedStatementValue(
-        ['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
+      ['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
     H5P.setFinished(contentId, score, maxScore);
   }
 };
@@ -126,7 +126,7 @@ H5P.externalDispatcher.on('xAPI', function (event) {
     var total_score = event.getScore();
     var total_maxScore = event.getMaxScore();
     var contentId = event.getVerifiedStatementValue(
-        ['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
+      ['object', 'definition', 'extensions', 'http://h5p.org/x-api/h5p-local-content-id']);
     if (H5P.opened[contentId] === undefined) {
       H5P.opened[contentId] = new Date();
     }

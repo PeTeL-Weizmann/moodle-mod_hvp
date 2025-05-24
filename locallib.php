@@ -61,7 +61,7 @@ function hvp_get_core_settings($context) {
 
     $contentlang = get_config('mod_hvp','contentlang');
     $saveeachinteraction = get_config('mod_hvp','saveeachinteraction');
-
+    
     $core = \mod_hvp\framework::instance('core');
 
     $settings = array(
@@ -202,9 +202,7 @@ function hvp_add_editor_assets($id = null, $mformid = null) {
     $editorajaxtoken = \H5PCore::createToken('editorajax');
 
     $interface = \mod_hvp\framework::instance('interface');
-    $siteuuid = $interface->getOption('site_uuid', null);
-    $secret   = $interface->getOption('hub_secret', null);
-    $enablecontenthub = !empty($siteuuid) && !empty($secret);
+    $enablecontenthub = ($interface->getOption('hub_is_enabled', null) ? $interface->getOption('h5p_search_content_hub', null) : "0") === "1";
     $contentlang = get_config('mod_hvp','contentlang');
 
     $settings['editor'] = array(

@@ -4,11 +4,11 @@
 /* Custom H5P font to use for icons. */
 @font-face {
   font-family: 'h5p';
-  src:  url('../fonts/h5p-core-28.eot?h1atjl');
-  src:  url('../fonts/h5p-core-28.eot?h1atjl#iefix') format('embedded-opentype'),
-    url('../fonts/h5p-core-28.ttf?h1atjl') format('truetype'),
-    url('../fonts/h5p-core-28.woff?h1atjl') format('woff'),
-    url('../fonts/h5p-core-28.svg?h1atjl#h5p-core-28') format('svg');
+  src:  url('../fonts/h5p-core-30.eot?h1atjl');
+  src:  url('../fonts/h5p-core-30.eot?h1atjl#iefix') format('embedded-opentype'),
+    url('../fonts/h5p-core-30.ttf?h1atjl') format('truetype'),
+    url('../fonts/h5p-core-30.woff?h1atjl') format('woff'),
+    url('../fonts/h5p-core-30.svg?h1atjl#h5p-core-30') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -180,7 +180,6 @@ div.h5p-fullscreen {
   /* Hack for IOS landscape / portrait */
   width: 10px;
   min-width: 100%;
-  *width: 100%;
   /* End of hack */
   height: 100%;
   z-index: 10;
@@ -704,11 +703,9 @@ iframe.h5peditor-semi-fullscreen {
 .h5p-dir-rtl .h5p-question .h5p-question-next:before {
   content: "\f053";
 }
-/* Was causing UI error in arithmetic quiz game
-.h5p-dir-rtl .h5p-joubelui-button:first-child {
-  margin: 0 0 1em 0.5em;
+.h5p-dir-rtl .h5p-joubelui-button:before {
+  padding-left: 0.5em;
 }
-*/
 .h5p-dir-rtl .h5p-joubelui-button:before {
   padding-left: 0.5em;
 }
@@ -752,9 +749,11 @@ iframe.h5peditor-semi-fullscreen {
   direction: rtl;
   text-align: right;
 }
+
 .h5p-dir-rtl .h5p-course-presentation .h5p-footer .h5p-footer-left-adjusted {
   flex: 4;
 }
+
 .h5p-dir-rtl .h5p-advanced-text ul,
 .h5p-dir-rtl .h5p-advanced-text ol {
   text-align: right;

@@ -101,11 +101,14 @@ if ($ADMIN->fulltree) {
     // CKEditor BIDI support
     $settings->add(new admin_setting_heading('mod_hvp/ckeditor_buttons', get_string('ckeditorbuttons', 'hvp'), ''));
     $settings->add(new admin_setting_configcheckbox('mod_hvp/bidi',
-        get_string('ckeditorbutton_bidi', 'hvp'), get_string('ckeditorbutton_bidi_help', 'hvp'), 1));
+        get_string('ckeditorbutton_bidi', 'hvp'), 
+        get_string('ckeditorbutton_bidi_help', 'hvp'), 1));
     $settings->add(new admin_setting_configcheckbox('mod_hvp/editordirsupport',
-        get_string('editordirsupport', 'hvp'), get_string('editordirsupport_help', 'hvp'), 1));
+        get_string('editordirsupport', 'hvp'), 
+        get_string('editordirsupport_help', 'hvp'), 1));
     $settings->add(new admin_setting_configcheckbox('mod_hvp/contentlang',
-        get_string('contentlang', 'hvp'), get_string('contentlang_help', 'hvp'), 1));
+        get_string('contentlang', 'hvp'), 
+        get_string('contentlang_help', 'hvp'), 1));
 
     // Content Types header.
     $settings->add(new admin_setting_heading('mod_hvp/hub_settings', get_string('hubsettingsheader', 'hvp'), ''));
@@ -134,6 +137,14 @@ if ($ADMIN->fulltree) {
         ''
     ));
 
+    // Content Hub on by default for all users
+    $settings->add(
+        new admin_setting_configcheckbox(
+            'mod_hvp/h5p_search_content_hub', 
+            get_string('contenthubsearchenable', 'hvp'),
+            get_string('contenthubsearchdescription', 'hvp'), 1));
+    
+    // Register on the Content Hub to allow uploading content
     $settings->add(new admin_setting_html(
         'mod_hvp/content_hub_settings_box',
         get_string('contenthub:settings:box', 'hvp'),

@@ -63,6 +63,8 @@ H5PEditor.language.core = {
   numberField: 'number field',
   orderItemUp: 'Order item up',
   orderItemDown: 'Order item down',
+  expandAllContent: 'Expand all content',
+  collapseAllContent: 'Collapse all content',
   removeItem: 'Remove item',
   hubPanelLabel: 'Select content type',
   importantInstructions: 'Important instructions',
@@ -292,4 +294,6 @@ H5PEditor.language.core = {
   a11yTitleShowLabel: 'Show label for AT',
   a11yTitleHideLabel: 'Hide label for AT',
   reuseSuccess: ':title was successfully imported from the H5P Hub.',
+  directionButtonRTL: 'Align text right-to-left',
+  directionButtonLTR: 'Align text left-to-right'
 };
