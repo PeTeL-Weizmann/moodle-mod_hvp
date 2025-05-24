@@ -1,7 +1,16 @@
-# H5P Moodle Plugin
+# H5P Moodle Plugin + RTL support
 
 Create and add rich content inside your LMS for free. Some examples of what you
 get with H5P are Interactive Video, Quizzes, Collage and Timeline.
+with RTL support for viewing and editing H5P content.
+
+There is also H5P quiz question type plugin wiht RTL support at:
+https://github.com/PeTeL-Weizmann/moodle-qtype_hvp
+
+## Versions
+
+H5P v1.26.1 for Moodle 4.1+ version is available in branch: v1261_rtl_support
+H5P v1.27.2 for Moodle 4.5+ version is available in branch: m45_hvp_1272_rtl_support
 
 ## Usage
 
@@ -62,3 +71,14 @@ Feel free to contribute by:
 reported before creating a new one. Perhaps you can contribute to an already
 existing issue?
 * Solving issues and submitting code through Pull Requests to the 'master' branch or on a separate feature branch.
+
+## License
+
+This plugin is a fork from the original plugin mod_hvp by [H5P.org](https://h5p.org).
+This plugin is licensed under the [GNU GPL v3 or later](https://www.gnu.org/licenses/gpl-3.0.html).
+RTL support added and funded by the [Department of science teaching](https://www.weizmann.ac.il/ScienceTeaching/) at the [Weizmann institute of science](https://www.weizmann.ac.il/), israel. 
+for the [PeTeL](https://stwww1.weizmann.ac.il/petel/) - personalized teaching and learning envirunment project.
+
+## Credit
+Moodle 4.1 H5P version with RTL support by Nadav Kavalerchik <nadav.kavalerchik@weizmann.ac.il>
+Moodle 4.5 H5P version with RTL support by Oshrat Lusky <oshrat.luski@weizmann.ac.il>
