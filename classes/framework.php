@@ -1517,6 +1517,10 @@ class framework implements \H5PFrameworkInterface {
             'minor_version' => $minorversion
         ));
 
+        if (!$library) {
+            return false;
+        }
+
         $librarydata = array(
             'libraryId' => $library->id,
             'machineName' => $library->machine_name,
@@ -1570,8 +1574,12 @@ class framework implements \H5PFrameworkInterface {
         $DB->execute("
             UPDATE {hvp}
             SET filtered = null
-            WHERE main_library_id $insql",
-            $inparams
+            WHERE id IN (
+                SELECT DISTINCT cl.hvp_id
+                FROM {hvp_contents_libraries} cl
+                WHERE library_id $insql
+            )",
+          $inparams
         );
     }
 
@@ -1592,13 +1600,13 @@ class framework implements \H5PFrameworkInterface {
      * Implements getNumContent().
      */
     // @codingStandardsIgnoreLine
-    public function getNumContent($libraryid, $skip = NULL) {
+    public function getNumContent($libraryid, $skip = NULL, $lastid = 0) {
         global $DB;
         $skipquery = empty($skip) ? '' : " AND id NOT IN ($skip)";
 
         return (int) $DB->get_field_sql(
-                "SELECT COUNT(id) FROM {hvp} WHERE main_library_id = ?{$skipquery}",
-                array($libraryid));
+                "SELECT COUNT(id) FROM {hvp} WHERE main_library_id = ? AND id > ?{$skipquery}",
+                array($libraryid, $lastid));
     }
 
     /**
@@ -1920,5 +1928,16 @@ class framework implements \H5PFrameworkInterface {
     public function setContentHubMetadataChecked($time, $lang = 'en') {
         global $DB;
         $DB->execute("UPDATE {hvp_content_hub_cache} SET last_checked = ? WHERE language = ?", array($time, $lang));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    // @codingStandardsIgnoreLine
+    public function resetHubOrganizationData() {
+        global $DB;
+
+        set_config('hub_secret', '', 'mod_hvp');
+        $DB->execute("UPDATE {hvp} SET hub_id = NULL, synced = NULL, shared = 0");
     }
 }

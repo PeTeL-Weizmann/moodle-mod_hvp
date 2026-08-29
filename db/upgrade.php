@@ -567,10 +567,18 @@ function hvp_upgrade_2020112600() {
     }
 }
 
+function hvp_upgrade_2026050600() {
+  global $DB;
+  $DB->execute("
+    UPDATE {hvp}
+    SET filtered = NULL
+  ");
+}
+
 /**
  * Adds css to hvp table
  */
-function hvp_upgrade_2022121201() {
+function hvp_upgrade_2026081301() {
     global $DB;
     $dbman = $DB->get_manager();
 
@@ -612,6 +620,8 @@ function xmldb_hvp_upgrade($oldversion) {
         2020082800,
         2020091500,
         2020112600,
+        2026050600,
+        2026081301,
     ];
 
     foreach ($upgrades as $version) {

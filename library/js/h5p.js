@@ -107,6 +107,10 @@ H5P.init = function (target) {
     // Add h5p-dir-rtl|ltr to h5p-content div, based on iframe parent document directionality.
     // TODO: remove, when we add directionality to each content based on its own language.
     // $element.addClass('h5p-dir-' + window.parent.document.dir);
+    
+    // Apply theme density
+    let density = H5PIntegration.theme?.density ?? 'large';
+    $element.addClass('h5p-' + density);
 
     H5P.getUserData(contentId, 'state', function (err, previousState) {
       if (previousState) {
@@ -186,7 +190,11 @@ H5P.init = function (target) {
       var $actions = actionBar.getDOMElement();
 
       actionBar.on('reuse', function () {
-        H5P.openReuseDialog($actions, contentData, library, instance, contentId);
+        H5P.openReuseDialog($actions, contentData, {
+          library: contentData.library,
+          params: JSON.parse(contentData.jsonContent),
+          metadata: contentData.metadata
+        }, instance, contentId);
         instance.triggerXAPI('accessed-reuse');
       });
       actionBar.on('copyrights', function () {
@@ -373,14 +381,14 @@ H5P.init = function (target) {
     }
   });
 
-   // RTL support in iframe, based on Moodle calculated user language
+  // RTL support in iframe, based on Moodle calculated user language
    if (H5PIntegration.contentlang == false) {
     var rtlclass = '';
     if (this.$body.hasClass('dir-rtl')) {
       rtlclass = 'h5p-dir-rtl';
     }
   }
-
+  
   // Insert H5Ps that should be in iframes.
   H5P.jQuery('iframe.h5p-iframe:not(.h5p-initialized)', target).each(function () {
     const iframe = this;
@@ -1311,20 +1319,25 @@ H5P.buildMetadataCopyrights = function (metadata) {
  */
 H5P.openReuseDialog = function ($element, contentData, library, instance, contentId) {
   let html = '';
+  let buttonCount = 0;
   if (contentData.displayOptions.export) {
     html += '<button type="button" class="h5p-big-button h5p-download-button"><div class="h5p-button-title">Download as an .h5p file</div><div class="h5p-button-description">.h5p files may be uploaded to any web-site where H5P content may be created.</div></button>';
+    buttonCount += 1;
   }
   if (contentData.displayOptions.export && contentData.displayOptions.copy) {
     html += '<div class="h5p-horizontal-line-text"><span>or</span></div>';
   }
   if (contentData.displayOptions.copy) {
     html += '<button type="button" class="h5p-big-button h5p-copy-button"><div class="h5p-button-title">Copy content</div><div class="h5p-button-description">Copied content may be pasted anywhere this content type is supported on this website.</div></button>';
+    buttonCount += 1;
   }
 
   const dialog = new H5P.Dialog('reuse', H5P.t('reuseContent'), html, $element);
 
   // Selecting embed code when dialog is opened
   H5P.jQuery(dialog).on('dialog-opened', function (e, $dialog) {
+    const scrollContent = $dialog[0].querySelector('.h5p-scroll-content');
+    scrollContent.style.setProperty('--button-count', buttonCount);
     H5P.jQuery('<a href="https://h5p.org/node/442225" target="_blank">More Info</a>').click(function (e) {
       e.stopPropagation();
     }).appendTo($dialog.find('h2'));
@@ -1920,7 +1933,7 @@ H5P.MediaCopyright = function (copyright, labels, order, extraFields) {
  * @param {string} source
  * @param {number} width
  * @param {number} height
- * @param {string} alt 
+ * @param {string} alt
  *  alternative text for the thumbnail
  */
 H5P.Thumbnail = function (source, width, height, alt) {
@@ -2099,6 +2112,13 @@ H5P.libraryFromString = function (library) {
  *   The full path to the library.
  */
 H5P.getLibraryPath = function (library) {
+  if (H5PIntegration &&
+      H5PIntegration.libraryDirectories &&
+      library in H5PIntegration.libraryDirectories) {
+    // Use H5PIntegration.libraryDirectories if it exists for this library
+    library = H5PIntegration.libraryDirectories[library];
+  }
+
   if (H5PIntegration.urlLibraries !== undefined) {
     // This is an override for those implementations that has a different libraries URL, e.g. Moodle
     return H5PIntegration.urlLibraries + '/' + library;
@@ -2742,7 +2762,7 @@ H5P.createTitle = function (rawTitle, maxLength) {
         }
         return path.substr(0, prefix.length) === prefix ? path : prefix + path;
       }
-      
+
       return path; // Will automatically be looked for in tmp folder
     });
 
